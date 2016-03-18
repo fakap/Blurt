@@ -48,12 +48,12 @@ public class WelcomeActivity extends AppCompatActivity {
 
     private void setUpFacebookLogin() {
         LoginButton facebookLoginButton = (LoginButton) findViewById(R.id.facebook_login_button);
+        assert facebookLoginButton != null;
         facebookLoginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 signInWithFacebook(loginResult.getAccessToken());
-                Intent intent = new Intent();
-                intent.putExtra(Constants.FACEBOOK_ACCESS_TOKEN, loginResult.getAccessToken());
+                Intent intent = new Intent(getApplicationContext(), BlurtActivity.class);
                 startActivity(intent);
             }
 
