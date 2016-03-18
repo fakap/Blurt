@@ -1,15 +1,19 @@
 package com.fakap.blurt;
 
+import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.TextView;
 import android.widget.VideoView;
 
 public class WelcomeActivity extends AppCompatActivity {
     public static final String TAG = "WelcomeActivity";
 
-    VideoView parrotVideoView;
+    VideoView parrotVideo;
+    TextView blurtLabel;
+    private Typeface labelTypeface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,29 +21,39 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
 
         loadParrotVideo();
+        loadBlurtLabel();
     }
 
     private void loadParrotVideo() {
-        parrotVideoView = (VideoView) findViewById(R.id.parrot_video_view);
+        parrotVideo = (VideoView) findViewById(R.id.parrot_video_view);
         String videoPath = ("android.resource://"+getPackageName()+"/raw/parrot");
         Uri parrotVideoUri = Uri.parse(videoPath);
 
-        parrotVideoView.setVideoURI(parrotVideoUri);
+        parrotVideo.setVideoURI(parrotVideoUri);
 
-        parrotVideoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+        parrotVideo.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
-                parrotVideoView.start();
+                parrotVideo.start();
             }
         });
+    }
+
+    private void loadBlurtLabel() {
+        blurtLabel = (TextView) findViewById(R.id.blurt_title_label_text_view);
+
+        labelTypeface = Typeface.createFromAsset(getAssets(),
+                "fonts/confetti.otf");
+
+        blurtLabel.setTypeface(labelTypeface);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        parrotVideoView.start();
-        if (parrotVideoView != null && !parrotVideoView.isPlaying()) {
-            parrotVideoView.resume();
+        parrotVideo.start();
+        if (parrotVideo != null && !parrotVideo.isPlaying()) {
+            parrotVideo.resume();
         }
     }
 
@@ -50,7 +64,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
     @Override
     protected void onStop() {
-        parrotVideoView.suspend();
+        parrotVideo.suspend();
         super.onStop();
     }
 }
