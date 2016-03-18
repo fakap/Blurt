@@ -10,4 +10,11 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.fakap.blurt.MainActivity">
 
+    <fragment
+        android:name="com.fakap.blurt.FriendListFragment"
+        android:id="@+id/friend_list_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
 </RelativeLayout>

@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
-import com.facebook.FacebookSdk;
 import android.widget.VideoView;
 
 public class WelcomeActivity extends AppCompatActivity {
