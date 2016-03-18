@@ -36,10 +36,10 @@ public class FriendListFragment extends Fragment {
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static FriendListFragment newInstance(int columnCount) {
+    public static FriendListFragment newInstance() {
         FriendListFragment fragment = new FriendListFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
+        args.putInt(ARG_COLUMN_COUNT, 1);
         fragment.setArguments(args);
         return fragment;
     }

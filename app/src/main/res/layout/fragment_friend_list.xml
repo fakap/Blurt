@@ -11,4 +11,5 @@
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
     tools:context=".FriendListFragment"
+    android:background="@android:color/holo_orange_light"
     tools:listitem="@layout/fragment_friend"/>
