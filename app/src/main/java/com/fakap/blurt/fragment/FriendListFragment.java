@@ -1,4 +1,4 @@
-package com.fakap.blurt;
+package com.fakap.blurt.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.fakap.blurt.MyFriendRecyclerViewAdapter;
+import com.fakap.blurt.R;
 import com.fakap.blurt.dummy.DummyContent;
 import com.fakap.blurt.dummy.DummyContent.DummyItem;
 

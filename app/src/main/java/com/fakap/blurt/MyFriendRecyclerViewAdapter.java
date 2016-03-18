@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.fakap.blurt.FriendListFragment.OnListFragmentInteractionListener;
+import com.fakap.blurt.fragment.FriendListFragment.OnListFragmentInteractionListener;
 import com.fakap.blurt.dummy.DummyContent.DummyItem;
 
 import java.util.List;
