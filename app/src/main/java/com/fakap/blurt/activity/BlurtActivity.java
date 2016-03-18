@@ -7,13 +7,13 @@ import com.fakap.blurt.FriendListFragment;
 import com.fakap.blurt.R;
 import com.fakap.blurt.dummy.DummyContent;
 
-public class MainActivity extends AppCompatActivity
+public class BlurtActivity extends AppCompatActivity
         implements FriendListFragment.OnListFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_blurt);
     }
 
     @Override

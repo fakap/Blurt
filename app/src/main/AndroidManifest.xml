@@ -20,7 +20,7 @@
             <!--</intent-filter>-->
         </activity>
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".activity.BlurtActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
