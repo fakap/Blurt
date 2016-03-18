@@ -8,8 +8,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.facebook.AccessToken;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
 import com.fakap.blurt.fragment.ChatFragment;
 import com.fakap.blurt.fragment.FriendListFragment;
 import com.fakap.blurt.R;
@@ -19,7 +23,9 @@ public class BlurtActivity extends FragmentActivity
         implements FriendListFragment.OnListFragmentInteractionListener,
         ChatFragment.OnFragmentInteractionListener
 {
-    AccessToken currentFbccessToken;
+    private static final String TAG = "BlurtActivity";
+
+    AccessToken currentFbAccessToken;
     AccessToken oldFbAccessToken;
 
     @Override
@@ -36,11 +42,22 @@ public class BlurtActivity extends FragmentActivity
     }
 
     private void getFbAccessToken() {
-        currentFbccessToken = AccessToken.getCurrentAccessToken();
+        currentFbAccessToken = AccessToken.getCurrentAccessToken();
     }
 
     private void getFriendList() {
-
+        new GraphRequest(
+                currentFbAccessToken,
+                "/me/friends",
+                null,
+                HttpMethod.GET,
+                new GraphRequest.Callback() {
+                    @Override
+                    public void onCompleted(GraphResponse response) {
+                        Log.d(TAG, response.toString());
+                    }
+                }
+        ).executeAsync();
     }
 
     // List Fragment Interaction Listener

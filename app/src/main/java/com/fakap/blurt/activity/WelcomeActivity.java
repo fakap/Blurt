@@ -35,7 +35,7 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         if (savedInstanceState == null) {
             Firebase.setAndroidContext(this);
-            FacebookSdk.sdkInitialize(getApplicationContext());
+            FacebookSdk.sdkInitialize(this);
         }
         Constants.firebaseReference = new Firebase("https://fakap-blurt.firebaseio.com/");
         callbackManager = CallbackManager.Factory.create();
@@ -49,6 +49,7 @@ public class WelcomeActivity extends AppCompatActivity {
     private void setUpFacebookLogin() {
         LoginButton facebookLoginButton = (LoginButton) findViewById(R.id.facebook_login_button);
         assert facebookLoginButton != null;
+        facebookLoginButton.setReadPermissions("user_friends");
         facebookLoginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
@@ -119,6 +120,12 @@ public class WelcomeActivity extends AppCompatActivity {
         if (parrotVideo != null && !parrotVideo.isPlaying()) {
             parrotVideo.resume();
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
