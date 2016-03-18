@@ -1,8 +1,10 @@
-package com.fakap.blurt;
+package com.fakap.blurt.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.fakap.blurt.FriendListFragment;
+import com.fakap.blurt.R;
 import com.fakap.blurt.dummy.DummyContent;
 
 public class MainActivity extends AppCompatActivity

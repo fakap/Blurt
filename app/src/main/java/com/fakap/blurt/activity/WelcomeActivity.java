@@ -1,4 +1,4 @@
-package com.fakap.blurt;
+package com.fakap.blurt.activity;
 
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.VideoView;
+
+import com.fakap.blurt.R;
 
 public class WelcomeActivity extends AppCompatActivity {
     public static final String TAG = "WelcomeActivity";
