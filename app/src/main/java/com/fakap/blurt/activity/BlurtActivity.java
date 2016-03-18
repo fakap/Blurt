@@ -1,5 +1,6 @@
 package com.fakap.blurt.activity;
 
+import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -7,12 +8,15 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 
+import com.fakap.blurt.fragment.ChatFragment;
 import com.fakap.blurt.fragment.FriendListFragment;
 import com.fakap.blurt.R;
 import com.fakap.blurt.dummy.DummyContent;
 
 public class BlurtActivity extends FragmentActivity
-        implements FriendListFragment.OnListFragmentInteractionListener {
+        implements FriendListFragment.OnListFragmentInteractionListener,
+        ChatFragment.OnFragmentInteractionListener
+{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,8 +27,15 @@ public class BlurtActivity extends FragmentActivity
         pager.setAdapter(new BlurtPagerAdapter(getSupportFragmentManager()));
     }
 
+    // List Fragment Interaction Listener
     @Override
     public void onListFragmentInteraction(DummyContent.DummyItem item) {
+    }
+
+    // Chat Fragment Interaction Listener
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 
     private class BlurtPagerAdapter extends FragmentPagerAdapter {
@@ -37,7 +48,7 @@ public class BlurtActivity extends FragmentActivity
             switch (position) {
 
                 case 0: return FriendListFragment.newInstance();
-                //case 1: return ChatFragment.newInstance();
+                case 1: return ChatFragment.newInstance("dummyId");
                 default: return FriendListFragment.newInstance();
             }
         }
