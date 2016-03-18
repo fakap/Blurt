@@ -1,5 +1,6 @@
 package com.fakap.blurt.activity;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -15,6 +16,7 @@ import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.fakap.blurt.Constants;
 import com.fakap.blurt.R;
 import com.firebase.client.AuthData;
 import com.firebase.client.Firebase;
@@ -23,7 +25,6 @@ import com.firebase.client.FirebaseError;
 public class WelcomeActivity extends AppCompatActivity {
     public static final String TAG = "WelcomeActivity";
 
-    Firebase ref;
     VideoView parrotVideo;
     TextView blurtLabel;
     private Typeface labelTypeface;
@@ -36,7 +37,7 @@ public class WelcomeActivity extends AppCompatActivity {
             Firebase.setAndroidContext(this);
             FacebookSdk.sdkInitialize(getApplicationContext());
         }
-        ref = new Firebase("https://fakap-blurt.firebaseio.com/");
+        Constants.firebaseReference = new Firebase("https://fakap-blurt.firebaseio.com/");
         callbackManager = CallbackManager.Factory.create();
         setContentView(R.layout.activity_welcome);
 
@@ -51,6 +52,9 @@ public class WelcomeActivity extends AppCompatActivity {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 signInWithFacebook(loginResult.getAccessToken());
+                Intent intent = new Intent();
+                intent.putExtra(Constants.FACEBOOK_ACCESS_TOKEN, loginResult.getAccessToken());
+                startActivity(intent);
             }
 
             @Override
@@ -67,11 +71,12 @@ public class WelcomeActivity extends AppCompatActivity {
 
     private void signInWithFacebook(AccessToken token) {
         if (token != null) {
-            ref.authWithOAuthToken("facebook", token.getToken(), new Firebase.AuthResultHandler() {
+            Constants.firebaseReference.authWithOAuthToken("facebook", token.getToken(), new Firebase.AuthResultHandler() {
                 @Override
                 public void onAuthenticated(AuthData authData) {
-                    
+
                 }
+
                 @Override
                 public void onAuthenticationError(FirebaseError firebaseError) {
                     // there was an error
@@ -79,7 +84,7 @@ public class WelcomeActivity extends AppCompatActivity {
             });
         } else {
         /* Logged out of Facebook so do a logout from the Firebase app */
-            ref.unauth();
+            Constants.firebaseReference.unauth();
         }
     }
 
