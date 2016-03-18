@@ -8,22 +8,79 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.VideoView;
 
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.fakap.blurt.R;
+import com.firebase.client.AuthData;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
 
 public class WelcomeActivity extends AppCompatActivity {
     public static final String TAG = "WelcomeActivity";
 
+    Firebase ref;
     VideoView parrotVideo;
     TextView blurtLabel;
     private Typeface labelTypeface;
+    private CallbackManager callbackManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (savedInstanceState == null) {
+            Firebase.setAndroidContext(this);
+            FacebookSdk.sdkInitialize(getApplicationContext());
+        }
+        ref = new Firebase("https://fakap-blurt.firebaseio.com/");
+        callbackManager = CallbackManager.Factory.create();
         setContentView(R.layout.activity_welcome);
 
+        setUpFacebookLogin();
         loadParrotVideo();
         loadBlurtLabel();
+    }
+
+    private void setUpFacebookLogin() {
+        LoginButton facebookLoginButton = (LoginButton) findViewById(R.id.facebook_login_button);
+        facebookLoginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                signInWithFacebook(loginResult.getAccessToken());
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+
+            }
+        });
+    }
+
+    private void signInWithFacebook(AccessToken token) {
+        if (token != null) {
+            ref.authWithOAuthToken("facebook", token.getToken(), new Firebase.AuthResultHandler() {
+                @Override
+                public void onAuthenticated(AuthData authData) {
+                    
+                }
+                @Override
+                public void onAuthenticationError(FirebaseError firebaseError) {
+                    // there was an error
+                }
+            });
+        } else {
+        /* Logged out of Facebook so do a logout from the Firebase app */
+            ref.unauth();
+        }
     }
 
     private void loadParrotVideo() {
