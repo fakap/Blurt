@@ -1,6 +1,7 @@
 package com.fakap.blurt.fragment;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -36,7 +37,6 @@ public class FriendListFragment extends Fragment {
     Bundle bundle;
 
     private OnListFragmentInteractionListener onListFragmentInteractionListener;
-
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -86,6 +86,10 @@ public class FriendListFragment extends Fragment {
                             R.id.friend_pic_image_view);
                     TextView friendName = (TextView) convertView.findViewById(
                             R.id.friend_name_text_view);
+
+                    Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(),
+                            "fonts/Gidole-Regular.ttf");
+                    friendName.setTypeface(typeface);
 
                     final Friend friend = (Friend) getItem(position);
 
