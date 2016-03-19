@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.fakap.blurt.FriendProvider;
 import com.fakap.blurt.R;
+import com.fakap.blurt.activity.BlurtActivity;
 import com.fakap.blurt.model.Friend;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -83,7 +84,7 @@ public class FriendListFragment extends Fragment {
                     TextView friendName = (TextView) convertView.findViewById(
                             R.id.friend_name_text_view);
 
-                    Friend friend = (Friend) getItem(position);
+                    final Friend friend = (Friend) getItem(position);
 
                     Log.d(TAG, "setting profile pic");
                     friendPic.setImageBitmap(friend.getProfilePic());
@@ -92,7 +93,7 @@ public class FriendListFragment extends Fragment {
                     convertView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-
+                            BlurtActivity.lastContactedFriendId = friend.getId();
                         }
                     });
                 }

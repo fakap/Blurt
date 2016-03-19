@@ -17,6 +17,7 @@ public class BlurtActivity extends FragmentActivity
         implements FriendListFragment.OnListFragmentInteractionListener,
         ChatFragment.OnFragmentInteractionListener {
     private static final String TAG = "BlurtActivity";
+    public static String lastContactedFriendId = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +52,7 @@ public class BlurtActivity extends FragmentActivity
                 case 0:
                     return FriendListFragment.newInstance();
                 case 1:
-                    return ChatFragment.newInstance("dummyId");
+                    return ChatFragment.newInstance("bleh");
                 default:
                     return FriendListFragment.newInstance();
             }
