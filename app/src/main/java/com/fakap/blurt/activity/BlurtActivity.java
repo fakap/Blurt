@@ -22,6 +22,15 @@ public class BlurtActivity extends FragmentActivity
     private ViewPager pager;
 
     @Override
+    public void onBackPressed() {
+        if (pager.getCurrentItem() == 1) {
+            pager.setCurrentItem(0);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
