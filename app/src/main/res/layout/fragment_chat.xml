@@ -6,13 +6,14 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
+
         android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/friend_chat_bubble"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="friendChatBubble"
+            android:contentDescription="@string/friend_bubble_description"
             android:src="@drawable/friendbubble"/>
 
         <TextView
@@ -31,7 +32,7 @@
             android:id="@+id/my_chat_bubble"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="friendChatBubble"
+            android:contentDescription="@string/my_bubble_description"
             android:src="@drawable/mybubble"/>
 
         <TextView
