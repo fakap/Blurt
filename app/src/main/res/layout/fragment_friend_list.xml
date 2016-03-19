@@ -20,10 +20,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:paddingLeft="20dp"
+            android:paddingLeft="8dp"
             android:text="@string/blurt_title"
-            android:textColor="@color/colorBeige"
-            android:textSize="32sp"/>
+            android:textColor="#F6EFF2"
+            android:textSize="34sp"/>
 
     </FrameLayout>
 
