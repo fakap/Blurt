@@ -9,11 +9,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 
-import com.fakap.blurt.MyFriendRecyclerViewAdapter;
+import com.fakap.blurt.FriendProvider;
 import com.fakap.blurt.R;
-import com.fakap.blurt.dummy.DummyContent;
-import com.fakap.blurt.dummy.DummyContent.DummyItem;
+import com.fakap.blurt.model.Friend;
+
+import java.util.ArrayList;
 
 /**
  * A fragment representing a list of Friends.
@@ -25,9 +29,12 @@ public class FriendListFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
+    private static final String TAG = "FriendListFragment";
     // TODO: Customize parameters
-    private int mColumnCount = 1;
-    private OnListFragmentInteractionListener mListener;
+
+    FriendProvider friendProvider;
+    BaseAdapter friendListAdapter;
+    Bundle bundle;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -36,23 +43,58 @@ public class FriendListFragment extends Fragment {
     public FriendListFragment() {
     }
 
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
     public static FriendListFragment newInstance() {
         FriendListFragment fragment = new FriendListFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, 1);
         fragment.setArguments(args);
+        fragment.setBundle(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
 
-        if (getArguments() != null) {
-            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
-        }
+    private void initializeList() {
+        friendListAdapter = new BaseAdapter() {
+            @Override
+            public int getCount() {
+                return friendProvider.getCount();
+            }
+
+            @Override
+            public Object getItem(int position) {
+                return friendProvider.getFriend(position);
+            }
+
+            @Override
+            public long getItemId(int position) {
+                return Long.parseLong(friendProvider.getFriend(position).getId());
+            }
+
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                if (convertView == null) {
+                    convertView = getActivity().getLayoutInflater()
+                            .inflate(R.layout.fragment_friend, parent, false);
+
+                    TextView friendName = (TextView) convertView.findViewById(
+                            R.id.friend_name_text_view);
+
+                    friendName.setText(((Friend) getItem(position)).getName());
+
+                    convertView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                        }
+                    });
+                }
+                return convertView;
+            }
+        };
     }
 
     @Override
@@ -60,17 +102,12 @@ public class FriendListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_friend_list, container, false);
 
-        // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
-            recyclerView.setAdapter(new MyFriendRecyclerViewAdapter(DummyContent.ITEMS, mListener));
-        }
+        friendProvider = new FriendProvider();
+        ListView friendListView = (ListView) view.findViewById(R.id.friend_list_view);
+        initializeList();
+        friendProvider.setAdapter(friendListAdapter);
+        friendListView.setAdapter(friendListAdapter);
+
         return view;
     }
 
@@ -78,18 +115,15 @@ public class FriendListFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnListFragmentInteractionListener) {
-            mListener = (OnListFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnListFragmentInteractionListener");
-        }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
+    }
+
+    public void setBundle(Bundle bundle) {
+        this.bundle = bundle;
     }
 
     /**
@@ -104,6 +138,8 @@ public class FriendListFragment extends Fragment {
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+        void onListFragmentInteraction(Friend item);
     }
+
+
 }

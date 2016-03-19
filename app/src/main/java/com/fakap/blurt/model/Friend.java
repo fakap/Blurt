@@ -7,6 +7,10 @@ public class Friend {
     private String id;
     private String name;
 
+    public String getId() {
+        return id;
+    }
+
     public Friend(String id, String name, Bitmap profilePic) {
         this.id = id;
         this.name = name;

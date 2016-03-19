@@ -85,18 +85,18 @@ public class WelcomeActivity extends AppCompatActivity {
                             currentAccessToken.getToken(), new Firebase.AuthResultHandler() {
                                 @Override
                                 public void onAuthenticated(AuthData authData) {
-                                    Log.i(TAG, "Facebook authentication successful.");
-                                    Constants.firebaseReference.child("users").child().addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(DataSnapshot dataSnapshot) {
-
-                                        }
-
-                                        @Override
-                                        public void onCancelled(FirebaseError firebaseError) {
-
-                                        }
-                                    });
+                                    //Log.i(TAG, "Facebook authentication successful.");
+                                    //Constants.firebaseReference.child("users").child().addListenerForSingleValueEvent(new ValueEventListener() {
+                                    //    @Override
+                                    //    public void onDataChange(DataSnapshot dataSnapshot) {
+                                    //
+                                    //    }
+                                    //
+                                    //    @Override
+                                    //    public void onCancelled(FirebaseError firebaseError) {
+                                    //
+                                    //    }
+                                    //});
                                 }
 
                                 @Override
@@ -104,6 +104,8 @@ public class WelcomeActivity extends AppCompatActivity {
                                     Log.e(TAG, firebaseError.toString());
                                 }
                             });
+                    Intent intent = new Intent(getApplicationContext(), BlurtActivity.class);
+                    startActivity(intent);
                 } else {
                     Constants.firebaseReference.unauth();
                 }
