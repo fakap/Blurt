@@ -26,6 +26,9 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class WelcomeActivity extends AppCompatActivity {
     public static final String TAG = "WelcomeActivity";
 
@@ -97,6 +100,9 @@ public class WelcomeActivity extends AppCompatActivity {
                                     //
                                     //    }
                                     //});
+                                    Log.i(TAG, "Facebook authentication successful.");
+                                    Intent intent = new Intent(getApplicationContext(), BlurtActivity.class);
+                                    startActivity(intent);
                                 }
 
                                 @Override
@@ -112,7 +118,7 @@ public class WelcomeActivity extends AppCompatActivity {
             }
         };
     }
-
+    
     private void loadParrotVideo() {
         parrotVideo = (VideoView) findViewById(R.id.parrot_video_view);
         String videoPath = ("android.resource://"+getPackageName()+"/raw/parrot");
