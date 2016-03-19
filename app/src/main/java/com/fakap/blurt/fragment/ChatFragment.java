@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.facebook.AccessToken;
@@ -44,6 +45,7 @@ public class ChatFragment extends Fragment {
     private String friendId;
 
     private OnFragmentInteractionListener mListener;
+    private View view;
 
     public ChatFragment() {
         // Required empty public constructor
@@ -76,6 +78,7 @@ public class ChatFragment extends Fragment {
     }
 
     public void setUpConversation(String friendId) {
+        hideHelp();
         receiverId = friendId;
         authorId = AccessToken.getCurrentAccessToken().getUserId();
     }
@@ -125,7 +128,7 @@ public class ChatFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_chat, container, false);
+        view = inflater.inflate(R.layout.fragment_chat, container, false);
 
         // set feathered background
         //if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
@@ -172,6 +175,11 @@ public class ChatFragment extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
+    }
+
+    private void hideHelp() {
+        ImageView helpView = (ImageView) view.findViewById(R.id.help_image_view);
+        helpView.setVisibility(View.INVISIBLE);
     }
 
     @Override

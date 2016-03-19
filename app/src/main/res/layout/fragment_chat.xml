@@ -1,70 +1,85 @@
-<LinearLayout
-    android:id="@+id/chat_linear_layout"
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".fragment.ChatFragment">
+    android:layout_height="match_parent">
 
-    <RelativeLayout
+    <LinearLayout
+        android:id="@+id/chat_linear_layout"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginTop="8dp"
-        android:gravity="top">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".fragment.ChatFragment">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/view"
-            android:layout_width="54dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="85dp"
-            android:foregroundGravity="bottom"
-            android:src="@drawable/ptaszyna"/>
-
-        <EditText
-            android:id="@+id/friend_bubble_edit_text"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginRight="4dp"
-            android:layout_toEndOf="@+id/view"
-            android:layout_toRightOf="@+id/view"
-            android:background="@drawable/friendbubble"
-            android:editable="false"
-            android:gravity="top"
-            android:hint="..."
-            android:maxEms="150"
-            android:paddingLeft="24dp"
-            android:paddingTop="24dp"
-            android:textSize="20sp"/>
+            android:layout_height="150dp"
+            android:layout_marginTop="8dp"
+            android:gravity="top">
 
-    </RelativeLayout>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/view"
+                android:layout_width="54dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="85dp"
+                android:foregroundGravity="bottom"
+                android:src="@drawable/ptaszyna"/>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="6dp"
-        >
+            <EditText
+                android:id="@+id/friend_bubble_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="4dp"
+                android:layout_toEndOf="@+id/view"
+                android:layout_toRightOf="@+id/view"
+                android:background="@drawable/friendbubble"
+                android:editable="false"
+                android:gravity="top"
+                android:hint="..."
+                android:maxEms="150"
+                android:paddingLeft="24dp"
+                android:paddingTop="24dp"
+                android:textSize="20sp"/>
 
-        <EditText
-            android:id="@+id/my_bubble_edit_text"
-            android:layout_width="300dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
             android:layout_alignParentRight="true"
-            android:layout_marginLeft="40dp"
-            android:background="@drawable/mybubble"
-            android:gravity="top"
-            android:hint="@string/blurt_here_hint"
-            android:maxEms="150"
-            android:paddingLeft="24dp"
-            android:paddingTop="24dp"
-            android:textSize="20sp"/>
-    </RelativeLayout>
+            android:layout_marginTop="6dp"
+            >
 
-</LinearLayout>
+            <EditText
+                android:id="@+id/my_bubble_edit_text"
+                android:layout_width="300dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="40dp"
+                android:background="@drawable/mybubble"
+                android:gravity="top"
+                android:hint="@string/blurt_here_hint"
+                android:maxEms="150"
+                android:paddingLeft="24dp"
+                android:paddingTop="24dp"
+                android:textSize="20sp"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/help_image_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/help"
+        android:visibility="visible"
+        />
+</RelativeLayout>
