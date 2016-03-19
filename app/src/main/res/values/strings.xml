@@ -9,4 +9,6 @@
     <string name="blurt_here_hint">Blurt here!</string>
     <string name="online_status">Online</string>
     <string name="imie_nazwisko">Imie nazwisko</string>
+    <string name="toolbar_desc">fakeToolbar</string>
+    <string name="blurt_title">Blurt</string>
 </resources>

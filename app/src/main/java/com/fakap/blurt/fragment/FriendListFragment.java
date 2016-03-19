@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +18,8 @@ import com.fakap.blurt.FriendProvider;
 import com.fakap.blurt.R;
 import com.fakap.blurt.activity.BlurtActivity;
 import com.fakap.blurt.model.Friend;
+
+import org.w3c.dom.Text;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -127,6 +131,12 @@ public class FriendListFragment extends Fragment {
         initializeList();
         friendProvider.setAdapter(friendListAdapter);
         friendListView.setAdapter(friendListAdapter);
+
+        TextView blurtToolbarLabel = (TextView) view.findViewById(
+                R.id.blurt_toolbar_label);
+        Typeface blurtTypeface = Typeface.createFromAsset(getActivity().getAssets(),
+                "fonts/confetti.otf");
+        blurtToolbarLabel.setTypeface(blurtTypeface);
 
         return view;
     }

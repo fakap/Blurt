@@ -1,8 +1,39 @@
-<ListView
-    android:id="@+id/friend_list_view"
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:divider="#ABE287"
-    android:dividerHeight="1dp"
-    android:layout_margin="8dp"/>
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+
+        <ImageView
+            android:id="@+id/fake_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/toolbar_desc"
+            android:foreground="#ABE287"/>
+
+        <TextView
+            android:id="@+id/blurt_toolbar_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:paddingLeft="20dp"
+            android:text="@string/blurt_title"
+            android:textColor="@color/colorBeige"
+            android:textSize="32sp"/>
+
+    </FrameLayout>
+
+    <ListView
+        android:id="@+id/friend_list_view"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp"
+        android:divider="#ABE287"
+        android:dividerHeight="1dp"/>
+
+</LinearLayout>
