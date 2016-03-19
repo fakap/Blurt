@@ -19,7 +19,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.facebook.AccessToken;
 import com.fakap.blurt.Constants;
@@ -27,8 +26,6 @@ import com.fakap.blurt.R;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
-
-import org.w3c.dom.Text;
 
 
 /**
@@ -46,7 +43,6 @@ public class ChatFragment extends Fragment {
 
     // TODO: Rename and change types of parameters
     private String friendId;
-    private String name;
 
     private OnFragmentInteractionListener mListener;
     private View view;
@@ -59,7 +55,6 @@ public class ChatFragment extends Fragment {
     private String receiverId;
     private EditText authorEditText;
     private EditText receiverEditText;
-    private TextView nameView;
 
     /**
      * Use this factory method to create a new instance of
@@ -84,11 +79,6 @@ public class ChatFragment extends Fragment {
         }
         receiverId = friendId;
         authorId = AccessToken.getCurrentAccessToken().getUserId();
-    }
-
-    public void setName(String name) {
-        this.name = name;
-        nameView.setText(this.name);
     }
 
     public void setUpConversation() {
@@ -152,7 +142,6 @@ public class ChatFragment extends Fragment {
 
         authorEditText = (EditText) view.findViewById(R.id.my_bubble_edit_text);
         receiverEditText = (EditText) view.findViewById(R.id.friend_bubble_edit_text);
-        nameView = (TextView) view.findViewById(R.id.chat_contact_name);
 
         setUpConversation();
 
