@@ -1,5 +1,7 @@
 package com.fakap.blurt.fragment;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -34,6 +36,9 @@ public class FriendListFragment extends Fragment {
     FriendProvider friendProvider;
     BaseAdapter friendListAdapter;
     Bundle bundle;
+
+    private OnListFragmentInteractionListener onListFragmentInteractionListener;
+
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -94,6 +99,14 @@ public class FriendListFragment extends Fragment {
                         @Override
                         public void onClick(View v) {
                             BlurtActivity.lastContactedFriendId = friend.getId();
+                            //String friendId = friend.getId();
+                            //android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
+                            //android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                            //fragmentTransaction.replace(R.id.view_pager, ChatFragment.newInstance(friendId));
+                            //fragmentTransaction.addToBackStack(null);
+                            //fragmentTransaction.commit();
+
+                            FriendListFragment.this.onListFragmentInteractionListener.onListFragmentInteraction(friend);
                         }
                     });
                 }
@@ -120,6 +133,8 @@ public class FriendListFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+
+        onListFragmentInteractionListener = (OnListFragmentInteractionListener) context;
     }
 
     @Override

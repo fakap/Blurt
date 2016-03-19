@@ -18,6 +18,8 @@ public class BlurtActivity extends FragmentActivity
         ChatFragment.OnFragmentInteractionListener {
     private static final String TAG = "BlurtActivity";
     public static String lastContactedFriendId = null;
+    private ChatFragment chatFragment;
+    private ViewPager pager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +27,7 @@ public class BlurtActivity extends FragmentActivity
 
         setContentView(R.layout.activity_blurt);
 
-        ViewPager pager = (ViewPager) findViewById(R.id.view_pager);
+        pager = (ViewPager) findViewById(R.id.view_pager);
         pager.setAdapter(new BlurtPagerAdapter(getSupportFragmentManager()));
     }
 
@@ -37,7 +39,8 @@ public class BlurtActivity extends FragmentActivity
 
     @Override
     public void onListFragmentInteraction(Friend item) {
-
+        chatFragment.setUpConversation(item.getId());
+        pager.setCurrentItem(1);
     }
 
     // PagerAdapter for swiping between fragments
@@ -52,7 +55,8 @@ public class BlurtActivity extends FragmentActivity
                 case 0:
                     return FriendListFragment.newInstance();
                 case 1:
-                    return ChatFragment.newInstance("bleh");
+                    chatFragment = ChatFragment.newInstance("dummyId");
+                    return chatFragment;
                 default:
                     return FriendListFragment.newInstance();
             }
