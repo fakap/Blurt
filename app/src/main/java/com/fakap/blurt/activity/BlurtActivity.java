@@ -50,6 +50,7 @@ public class BlurtActivity extends FragmentActivity
     public void onListFragmentInteraction(Friend item) {
         chatFragment.setUpConversation(item.getId());
         chatFragment.setUpConversation();
+        chatFragment.clearBoxes();
         pager.setCurrentItem(1);
     }
 
