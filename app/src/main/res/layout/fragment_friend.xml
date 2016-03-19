@@ -28,18 +28,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
-            android:text="Imie nazwisko"
-            android:textAppearance="?attr/textAppearanceListItem"
+            android:text="@string/imie_nazwisko"
+            android:textAppearance="?attr/title"
             android:textSize="24sp"/>
 
         <TextView
             android:id="@+id/friend_last_online_text_view"
-            android:text="Last Online: 2hrs ago"
+            android:text="@string/online_status"
             android:layout_width="wrap_content"
             android:layout_below="@id/friend_name_text_view"
             android:layout_gravity="bottom"
+            android:layout_marginLeft="@dimen/text_margin"
             android:layout_height="wrap_content"
-            android:textSize="16sp"/>
+            android:textSize="16sp"
+            />
 
     </RelativeLayout>
 

@@ -7,4 +7,6 @@
     <string name="friend_bubble_description">friendChatBubble</string>
     <string name="my_bubble_description">friendChatBubble</string>
     <string name="blurt_here_hint">Blurt here!</string>
+    <string name="online_status">Online</string>
+    <string name="imie_nazwisko">Imie nazwisko</string>
 </resources>
