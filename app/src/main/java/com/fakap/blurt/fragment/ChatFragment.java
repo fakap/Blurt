@@ -1,8 +1,13 @@
 package com.fakap.blurt.fragment;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Shader;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import com.facebook.AccessToken;
 import com.fakap.blurt.Constants;
@@ -91,6 +97,17 @@ public class ChatFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_chat, container, false);
+
+        // set feathered background
+        //if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+        //LinearLayout chatLayout = (LinearLayout) view.findViewById(R.id.chat_linear_layout);
+        //Bitmap bmp = BitmapFactory.decodeResource(getResources(),
+        //        R.drawable.feathers);
+        //BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(), bmp);
+        //    bitmapDrawable.setAlpha(20);
+        //bitmapDrawable.setTileModeXY(Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
+        //    chatLayout.setBackground(bitmapDrawable);
+        //}
 
         authorEditText = (EditText) view.findViewById(R.id.my_bubble_edit_text);
         receiverEditText = (EditText) view.findViewById(R.id.friend_bubble_edit_text);
