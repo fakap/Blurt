@@ -10,6 +10,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,23 +65,50 @@ public class ChatFragment extends Fragment {
     public static ChatFragment newInstance(String friendId) {
         ChatFragment fragment = new ChatFragment();
         Bundle args = new Bundle();
-        fragment.setUpConversation(friendId);
+        fragment.setFriendId(friendId);
         args.putString(ARG_FRIEND_ID, friendId);
         fragment.setArguments(args);
         return fragment;
     }
 
+    private void setFriendId(String friendId) {
+        this.friendId = friendId;
+    }
+
     public void setUpConversation(String friendId) {
         receiverId = friendId;
         authorId = AccessToken.getCurrentAccessToken().getUserId();
+    }
+
+    private void setUpConversation() {
+        if (receiverId == null) {
+            return;
+        }
         Constants.firebaseReference.child(authorId).child(receiverId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String message = (String) dataSnapshot.getValue();
+                receiverEditText.setText(message);
             }
 
             @Override
             public void onCancelled(FirebaseError firebaseError) {
+            }
+        });
+        authorEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                Constants.firebaseReference.child(receiverId).child(authorId).setValue(s.toString());
             }
         });
     }
@@ -111,6 +140,8 @@ public class ChatFragment extends Fragment {
 
         authorEditText = (EditText) view.findViewById(R.id.my_bubble_edit_text);
         receiverEditText = (EditText) view.findViewById(R.id.friend_bubble_edit_text);
+
+        setUpConversation();
 
         Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(),
                 "fonts/Gidole-Regular.ttf");
