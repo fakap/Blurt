@@ -3,12 +3,13 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical"
-              tools:context=".fragment.ChatFragment">
+              tools:context=".fragment.ChatFragment"
+              android:alpha="1">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_marginTop="8dp"
         android:layout_height="150dp"
+        android:layout_marginTop="8dp"
         android:gravity="top">
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -38,10 +39,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_marginRight="4dp"
-            android:editable="false"
             android:layout_toEndOf="@+id/view"
             android:layout_toRightOf="@+id/view"
             android:background="@drawable/friendbubble"
+            android:editable="false"
             android:gravity="top"
             android:paddingLeft="24dp"
             android:paddingTop="24dp"
@@ -53,8 +54,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:layout_marginTop="6dp"
         android:layout_alignParentRight="true"
+        android:layout_marginTop="6dp"
         >
 
         <!--<ImageView-->

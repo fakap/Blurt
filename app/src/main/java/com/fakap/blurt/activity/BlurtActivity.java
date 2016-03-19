@@ -1,8 +1,5 @@
 package com.fakap.blurt.activity;
 
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -11,7 +8,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 
-import com.facebook.AccessToken;
 import com.fakap.blurt.fragment.ChatFragment;
 import com.fakap.blurt.fragment.FriendListFragment;
 import com.fakap.blurt.R;

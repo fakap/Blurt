@@ -33,6 +33,8 @@ public class ChatFragment extends Fragment {
 
     // TODO: Rename and change types of parameters
     private String friendId;
+    private String friendMessage;
+    private String myMessage;
 
     private OnFragmentInteractionListener mListener;
 
@@ -90,7 +92,7 @@ public class ChatFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_chat, container, false);
+            return inflater.inflate(R.layout.fragment_chat, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

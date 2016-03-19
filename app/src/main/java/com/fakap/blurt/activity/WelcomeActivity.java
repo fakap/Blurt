@@ -104,10 +104,10 @@ public class WelcomeActivity extends AppCompatActivity {
             }
         };
     }
-    
+
     private void loadParrotVideo() {
         parrotVideo = (VideoView) findViewById(R.id.parrot_video_view);
-        String videoPath = ("android.resource://"+getPackageName()+"/raw/parrot");
+        String videoPath = ("android.resource://" + getPackageName() + "/raw/parrot");
         Uri parrotVideoUri = Uri.parse(videoPath);
 
         parrotVideo.setVideoURI(parrotVideoUri);
