@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 
 import com.fakap.blurt.R;
 
@@ -74,6 +75,11 @@ public class ChatFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        // Force keyboard on
+        ((InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE)).
+                showSoftInput(getView(), InputMethodManager.SHOW_IMPLICIT);
+
+
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
@@ -85,6 +91,9 @@ public class ChatFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
+        //((InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE)).
+        //        hideSoftInputFromWindow(_pay_box_helper.getWindowToken(), 0);
+
         mListener = null;
     }
 

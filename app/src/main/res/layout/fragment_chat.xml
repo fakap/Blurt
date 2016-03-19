@@ -1,47 +1,69 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:context=".fragment.ChatFragment">
+                tools:context=".fragment.ChatFragment"
+                android:orientation="vertical">
 
     <RelativeLayout
-        android:layout_width="wrap_content"
-
+        android:layout_width="match_parent"
+        android:gravity="top"
         android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="54dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/ptaszyna"/>
 
         <ImageView
             android:id="@+id/friend_chat_bubble"
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:paddingRight="8dp"
+            android:layout_alignParentRight="true"
             android:contentDescription="@string/friend_bubble_description"
             android:src="@drawable/friendbubble"/>
 
-        <TextView
+        <EditText
             android:id="@+id/friend_bubble_textview"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="match_parent"
             android:text="@string/hello_blank_fragment"
-            />
+            android:textSize="20sp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="-32dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="236dp"/>
+
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="2dp"
+        android:layout_marginTop="152dp">
 
         <ImageView
             android:id="@+id/my_chat_bubble"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
             android:contentDescription="@string/my_bubble_description"
             android:src="@drawable/mybubble"/>
 
-        <TextView
+        <EditText
             android:id="@+id/my_bubble_textview"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="-96dp"
             android:text="@string/hello_blank_fragment"
+            android:textSize="20sp"
             />
     </RelativeLayout>
 
-
-</RelativeLayout>
+</LinearLayout>
