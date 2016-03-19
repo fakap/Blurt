@@ -8,8 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 
+import com.facebook.AccessToken;
+import com.fakap.blurt.Constants;
 import com.fakap.blurt.R;
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 
 
 /**
@@ -34,6 +40,11 @@ public class ChatFragment extends Fragment {
         // Required empty public constructor
     }
 
+    private String authorId;
+    private String receiverId;
+    private EditText authorEditText;
+    private EditText receiverEditText;
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -45,9 +56,26 @@ public class ChatFragment extends Fragment {
     public static ChatFragment newInstance(String friendId) {
         ChatFragment fragment = new ChatFragment();
         Bundle args = new Bundle();
+        fragment.setUpConversation(friendId);
         args.putString(ARG_FRIEND_ID, friendId);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    private void setUpConversation(String friendId) {
+        receiverId = friendId;
+        authorId = AccessToken.getCurrentAccessToken().getUserId();
+        Constants.firebaseReference.child(authorId).child(receiverId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String message = (String) dataSnapshot.getValue();
+
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+            }
+        });
     }
 
     @Override
