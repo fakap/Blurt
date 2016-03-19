@@ -21,7 +21,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class FriendProvider {
 
@@ -73,9 +72,7 @@ public class FriendProvider {
                 JSONObject friendObject = friendListArray.getJSONObject(i);
                 id = friendObject.getString("id");
                 name = friendObject.getString("name");
-                profilePhoto = getProfilePic(id);
-                Friend friend = new Friend(id, name, profilePhoto);
-                friendList.add(friend);
+                getProfilePicAndCreateFriend(id, name);
                 Log.d(TAG, "friend list size: " + friendList.size());
             }
             if (friendListAdapter != null) {
@@ -84,13 +81,9 @@ public class FriendProvider {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        for (Friend friend : friendList) {
-            Log.d(TAG, friend.toString());
-        }
     }
 
-    private Bitmap getProfilePic(String userId) {
+    private Bitmap getProfilePicAndCreateFriend(final String userId, final String name) {
         final Bitmap[] picture = {null};
         GraphRequest request = new GraphRequest(
                 AccessToken.getCurrentAccessToken(),
@@ -106,6 +99,8 @@ public class FriendProvider {
                                     .get("url");
                             URL pictureUrl = new URL(pictureUrlString);
                             picture[0] = new DownloadProfilePicTask().execute(pictureUrl).get();
+                            Friend friend = new Friend(userId, name, picture[0]);
+                            friendList.add(friend);
                             if (friendListAdapter != null) {
                                 friendListAdapter.notifyDataSetChanged();
                             }
