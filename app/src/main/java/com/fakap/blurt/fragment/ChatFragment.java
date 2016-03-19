@@ -88,6 +88,7 @@ public class ChatFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String message = (String) dataSnapshot.getValue();
+                
                 receiverEditText.setText(message);
             }
 
