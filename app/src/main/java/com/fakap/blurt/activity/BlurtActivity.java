@@ -17,9 +17,6 @@ import com.fakap.blurt.fragment.FriendListFragment;
 import com.fakap.blurt.R;
 import com.fakap.blurt.model.Friend;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class BlurtActivity extends FragmentActivity
         implements FriendListFragment.OnListFragmentInteractionListener,
         ChatFragment.OnFragmentInteractionListener {

@@ -3,9 +3,7 @@ package com.fakap.blurt.fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +15,7 @@ import com.fakap.blurt.FriendProvider;
 import com.fakap.blurt.R;
 import com.fakap.blurt.model.Friend;
 
-import java.util.ArrayList;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * A fragment representing a list of Friends.
@@ -80,10 +78,16 @@ public class FriendListFragment extends Fragment {
                     convertView = getActivity().getLayoutInflater()
                             .inflate(R.layout.fragment_friend, parent, false);
 
+                    CircleImageView friendPic = (CircleImageView) convertView.findViewById(
+                            R.id.friend_pic_image_view);
                     TextView friendName = (TextView) convertView.findViewById(
                             R.id.friend_name_text_view);
 
-                    friendName.setText(((Friend) getItem(position)).getName());
+                    Friend friend = (Friend) getItem(position);
+
+                    Log.d(TAG, "setting profile pic");
+                    friendPic.setImageBitmap(friend.getProfilePic());
+                    friendName.setText(friend.getName());
 
                     convertView.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -140,6 +144,5 @@ public class FriendListFragment extends Fragment {
         // TODO: Update argument type and name
         void onListFragmentInteraction(Friend item);
     }
-
 
 }

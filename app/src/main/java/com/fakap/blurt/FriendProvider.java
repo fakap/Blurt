@@ -106,7 +106,10 @@ public class FriendProvider {
                                     .get("url");
                             URL pictureUrl = new URL(pictureUrlString);
                             picture[0] = new DownloadProfilePicTask().execute(pictureUrl).get();
-                        } catch (JSONException | IOException | InterruptedException | ExecutionException e) {
+                            if (friendListAdapter != null) {
+                                friendListAdapter.notifyDataSetChanged();
+                            }
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
