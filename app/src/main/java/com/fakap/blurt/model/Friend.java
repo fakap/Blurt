@@ -1,27 +1,28 @@
 package com.fakap.blurt.model;
 
-import de.hdodenhof.circleimageview.CircleImageView;
+import android.graphics.Bitmap;
 
 public class Friend {
-    private CircleImageView friendProfilePic;
-    private String friendName;
-    private boolean online;
+    private Bitmap profilePic;
+    private String id;
+    private String name;
 
-    public Friend(CircleImageView friendProfilePic, String friendName) {
-        this.friendProfilePic = friendProfilePic;
-        this.friendName = friendName;
-        this.online = false;
+    public Friend(String id, String name, Bitmap profilePic) {
+        this.id = id;
+        this.name = name;
+        this.profilePic = profilePic;
     }
 
-    public boolean isOnline() {
-        return online;
+    public String getName() {
+        return name;
     }
 
-    public String getFriendName() {
-        return friendName;
+    public Bitmap getProfilePic() {
+        return profilePic;
     }
 
-    public CircleImageView getFriendProfilePic() {
-        return friendProfilePic;
+    @Override
+    public String toString() {
+        return "name: " + name + " id: " + id;
     }
 }
