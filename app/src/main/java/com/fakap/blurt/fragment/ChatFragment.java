@@ -74,7 +74,9 @@ public class ChatFragment extends Fragment {
     }
 
     public void setUpConversation(String friendId) {
-        hideHelp();
+        if (friendId != null) {
+            hideHelp();
+        }
         receiverId = friendId;
         authorId = AccessToken.getCurrentAccessToken().getUserId();
     }
