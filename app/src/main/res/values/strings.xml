@@ -6,4 +6,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="friend_bubble_description">friendChatBubble</string>
     <string name="my_bubble_description">friendChatBubble</string>
+    <string name="blurt_here_hint">Blurt here!</string>
 </resources>

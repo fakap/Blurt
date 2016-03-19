@@ -2,9 +2,9 @@
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              android:alpha="1"
               android:orientation="vertical"
-              tools:context=".fragment.ChatFragment"
-              android:alpha="1">
+              tools:context=".fragment.ChatFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -24,15 +24,6 @@
             android:foregroundGravity="bottom"
             android:src="@drawable/ptaszyna"/>
 
-        <!--<ImageView-->
-        <!--android:id="@+id/friend_chat_bubble"-->
-        <!--android:layout_width="300dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:paddingRight="8dp"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:contentDescription="@string/friend_bubble_description"-->
-        <!--android:src="@drawable/friendbubble"/>-->
-
         <EditText
             android:id="@+id/friend_bubble_edit_text"
             android:layout_width="match_parent"
@@ -44,9 +35,10 @@
             android:background="@drawable/friendbubble"
             android:editable="false"
             android:gravity="top"
+            android:hint="..."
+            android:maxEms="150"
             android:paddingLeft="24dp"
             android:paddingTop="24dp"
-            android:text="@string/hello_blank_fragment"
             android:textSize="20sp"/>
 
     </RelativeLayout>
@@ -58,14 +50,6 @@
         android:layout_marginTop="6dp"
         >
 
-        <!--<ImageView-->
-        <!--android:id="@+id/my_chat_bubble"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:contentDescription="@string/my_bubble_description"-->
-        <!--android:src="@drawable/mybubble"/>-->
-
         <EditText
             android:id="@+id/my_bubble_edit_text"
             android:layout_width="300dp"
@@ -75,9 +59,10 @@
             android:layout_marginLeft="40dp"
             android:background="@drawable/mybubble"
             android:gravity="top"
+            android:hint="@string/blurt_here_hint"
+            android:maxEms="150"
             android:paddingLeft="24dp"
             android:paddingTop="24dp"
-            android:text="@string/hello_blank_fragment"
             android:textSize="20sp"/>
     </RelativeLayout>
 
