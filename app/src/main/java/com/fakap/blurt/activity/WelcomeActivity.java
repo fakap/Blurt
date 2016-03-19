@@ -6,10 +6,12 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.VideoView;
 
 import com.facebook.AccessToken;
+import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -19,8 +21,10 @@ import com.facebook.login.widget.LoginButton;
 import com.fakap.blurt.Constants;
 import com.fakap.blurt.R;
 import com.firebase.client.AuthData;
+import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 
 public class WelcomeActivity extends AppCompatActivity {
     public static final String TAG = "WelcomeActivity";
@@ -28,7 +32,10 @@ public class WelcomeActivity extends AppCompatActivity {
     VideoView parrotVideo;
     TextView blurtLabel;
     private Typeface labelTypeface;
-    private CallbackManager callbackManager;
+
+    private LoginButton facebookLoginButton;
+    private CallbackManager facebookCallbackManager;
+    private AccessTokenTracker facebookAccessTokenTracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +45,6 @@ public class WelcomeActivity extends AppCompatActivity {
             FacebookSdk.sdkInitialize(this);
         }
         Constants.firebaseReference = new Firebase("https://fakap-blurt.firebaseio.com/");
-        callbackManager = CallbackManager.Factory.create();
         setContentView(R.layout.activity_welcome);
 
         setUpFacebookLogin();
@@ -47,46 +53,62 @@ public class WelcomeActivity extends AppCompatActivity {
     }
 
     private void setUpFacebookLogin() {
-        LoginButton facebookLoginButton = (LoginButton) findViewById(R.id.facebook_login_button);
+        facebookCallbackManager = CallbackManager.Factory.create();
+        facebookLoginButton = (LoginButton) findViewById(R.id.facebook_login_button);
         assert facebookLoginButton != null;
         facebookLoginButton.setReadPermissions("user_friends");
-        facebookLoginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+//        facebookLoginButton.registerCallback(facebookCallbackManager, new FacebookCallback<LoginResult>() {
+//            @Override
+//            public void onSuccess(LoginResult loginResult) {
+//                signInWithFacebook();
+//                Intent intent = new Intent(getApplicationContext(), BlurtActivity.class);
+//                startActivity(intent);
+//            }
+//
+//            @Override
+//            public void onCancel() {
+//
+//            }
+//
+//            @Override
+//            public void onError(FacebookException error) {
+//
+//            }
+//        });
+
+        facebookAccessTokenTracker = new AccessTokenTracker() {
             @Override
-            public void onSuccess(LoginResult loginResult) {
-                signInWithFacebook(loginResult.getAccessToken());
-                Intent intent = new Intent(getApplicationContext(), BlurtActivity.class);
-                startActivity(intent);
-            }
+            protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken) {
+                Log.i(TAG, "Facebook.AccessTokenTracker.OnCurrentAccessTokenChanged");
+                if (currentAccessToken != null) {
+                    Constants.firebaseReference.authWithOAuthToken("facebook",
+                            currentAccessToken.getToken(), new Firebase.AuthResultHandler() {
+                                @Override
+                                public void onAuthenticated(AuthData authData) {
+                                    Log.i(TAG, "Facebook authentication successful.");
+                                    Constants.firebaseReference.child("users").child().addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(DataSnapshot dataSnapshot) {
 
-            @Override
-            public void onCancel() {
+                                        }
 
-            }
+                                        @Override
+                                        public void onCancelled(FirebaseError firebaseError) {
 
-            @Override
-            public void onError(FacebookException error) {
+                                        }
+                                    });
+                                }
 
-            }
-        });
-    }
-
-    private void signInWithFacebook(AccessToken token) {
-        if (token != null) {
-            Constants.firebaseReference.authWithOAuthToken("facebook", token.getToken(), new Firebase.AuthResultHandler() {
-                @Override
-                public void onAuthenticated(AuthData authData) {
-
+                                @Override
+                                public void onAuthenticationError(FirebaseError firebaseError) {
+                                    Log.e(TAG, firebaseError.toString());
+                                }
+                            });
+                } else {
+                    Constants.firebaseReference.unauth();
                 }
-
-                @Override
-                public void onAuthenticationError(FirebaseError firebaseError) {
-                    // there was an error
-                }
-            });
-        } else {
-        /* Logged out of Facebook so do a logout from the Firebase app */
-            Constants.firebaseReference.unauth();
-        }
+            }
+        };
     }
 
     private void loadParrotVideo() {
@@ -125,7 +147,7 @@ public class WelcomeActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        callbackManager.onActivityResult(requestCode, resultCode, data);
+        facebookCallbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
