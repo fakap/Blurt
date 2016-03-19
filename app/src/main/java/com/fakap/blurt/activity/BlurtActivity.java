@@ -40,6 +40,7 @@ public class BlurtActivity extends FragmentActivity
     @Override
     public void onListFragmentInteraction(Friend item) {
         chatFragment.setUpConversation(item.getId());
+        chatFragment.setUpConversation();
         pager.setCurrentItem(1);
     }
 
@@ -55,7 +56,7 @@ public class BlurtActivity extends FragmentActivity
                 case 0:
                     return FriendListFragment.newInstance();
                 case 1:
-                    chatFragment = ChatFragment.newInstance("dummyId");
+                    chatFragment = ChatFragment.newInstance(null);
                     return chatFragment;
                 default:
                     return FriendListFragment.newInstance();

@@ -67,14 +67,10 @@ public class ChatFragment extends Fragment {
     public static ChatFragment newInstance(String friendId) {
         ChatFragment fragment = new ChatFragment();
         Bundle args = new Bundle();
-        fragment.setFriendId(friendId);
+        fragment.setUpConversation(friendId);
         args.putString(ARG_FRIEND_ID, friendId);
         fragment.setArguments(args);
         return fragment;
-    }
-
-    private void setFriendId(String friendId) {
-        this.friendId = friendId;
     }
 
     public void setUpConversation(String friendId) {
@@ -83,7 +79,7 @@ public class ChatFragment extends Fragment {
         authorId = AccessToken.getCurrentAccessToken().getUserId();
     }
 
-    private void setUpConversation() {
+    public void setUpConversation() {
         if (receiverId == null) {
             return;
         }
@@ -91,6 +87,7 @@ public class ChatFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String message = (String) dataSnapshot.getValue();
+                
                 receiverEditText.setText(message);
             }
 
