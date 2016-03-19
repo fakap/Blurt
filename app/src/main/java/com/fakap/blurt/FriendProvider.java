@@ -75,9 +75,6 @@ public class FriendProvider {
                 getProfilePicAndCreateFriend(id, name);
                 Log.d(TAG, "friend list size: " + friendList.size());
             }
-            if (friendListAdapter != null) {
-                friendListAdapter.notifyDataSetChanged();
-            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
