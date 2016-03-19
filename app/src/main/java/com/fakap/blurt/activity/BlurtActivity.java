@@ -22,9 +22,6 @@ public class BlurtActivity extends FragmentActivity
         ChatFragment.OnFragmentInteractionListener {
     private static final String TAG = "BlurtActivity";
 
-    AccessToken currentFbAccessToken;
-    AccessToken oldFbAccessToken;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,10 +30,6 @@ public class BlurtActivity extends FragmentActivity
 
         ViewPager pager = (ViewPager) findViewById(R.id.view_pager);
         pager.setAdapter(new BlurtPagerAdapter(getSupportFragmentManager()));
-    }
-
-    private void getFbAccessToken() {
-        currentFbAccessToken = AccessToken.getCurrentAccessToken();
     }
 
     // Chat Fragment Interaction Listener
@@ -59,7 +52,6 @@ public class BlurtActivity extends FragmentActivity
         @Override
         public Fragment getItem(int position) {
             switch (position) {
-
                 case 0:
                     return FriendListFragment.newInstance();
                 case 1:
