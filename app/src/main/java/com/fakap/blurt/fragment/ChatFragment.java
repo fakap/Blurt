@@ -1,6 +1,7 @@
 package com.fakap.blurt.fragment;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -33,8 +34,6 @@ public class ChatFragment extends Fragment {
 
     // TODO: Rename and change types of parameters
     private String friendId;
-    private String friendMessage;
-    private String myMessage;
 
     private OnFragmentInteractionListener mListener;
 
@@ -71,7 +70,6 @@ public class ChatFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String message = (String) dataSnapshot.getValue();
-
             }
 
             @Override
@@ -92,7 +90,17 @@ public class ChatFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-            return inflater.inflate(R.layout.fragment_chat, container, false);
+        View view = inflater.inflate(R.layout.fragment_chat, container, false);
+
+        authorEditText = (EditText) view.findViewById(R.id.my_bubble_edit_text);
+        receiverEditText = (EditText) view.findViewById(R.id.friend_bubble_edit_text);
+
+        Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(),
+                "fonts/Gidole-Regular.ttf");
+        authorEditText.setTypeface(typeface);
+        receiverEditText.setTypeface(typeface);
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

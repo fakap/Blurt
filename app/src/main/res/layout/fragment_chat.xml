@@ -34,7 +34,7 @@
         <!--android:src="@drawable/friendbubble"/>-->
 
         <EditText
-            android:id="@+id/friend_bubble_textview"
+            android:id="@+id/friend_bubble_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -67,7 +67,7 @@
         <!--android:src="@drawable/mybubble"/>-->
 
         <EditText
-            android:id="@+id/my_bubble_textview"
+            android:id="@+id/my_bubble_edit_text"
             android:layout_width="300dp"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
